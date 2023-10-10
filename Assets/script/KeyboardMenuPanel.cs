@@ -7,9 +7,12 @@ public class KeyboardMenuPanel : MonoBehaviour
 {
     [Header("Select Enter Script")]
     public UnityEvent ClickTrigger;
+    public UnityEvent ChooseTrigger;
 
     [SerializeField]
     private GameObject mySelIcon;
+
+
 
     public void SetStatus(bool _type)
     {
@@ -18,6 +21,14 @@ public class KeyboardMenuPanel : MonoBehaviour
     public void SelectTrigger()
     {
         ClickTrigger.Invoke();
+    }
+    public void ChooseTriggerAction()
+    {
+        if (ChooseTrigger != null)
+        {
+            ChooseTrigger.Invoke();
+        }
+
     }
 
 }

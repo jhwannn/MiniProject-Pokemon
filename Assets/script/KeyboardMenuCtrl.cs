@@ -31,6 +31,7 @@ public class KeyboardMenuCtrl : MonoBehaviour
                 nowSel++;
                 AllDeSel();
                 _panel[nowSel].SetStatus(true);
+                _panel[nowSel].ChooseTriggerAction();
             }
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -40,6 +41,8 @@ public class KeyboardMenuCtrl : MonoBehaviour
                 nowSel--;
                 AllDeSel();
                 _panel[nowSel].SetStatus(true);
+                _panel[nowSel].ChooseTriggerAction();
+
             }
         }
         if (Input.GetKeyDown(KeyCode.Return))
