@@ -101,5 +101,12 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         transform.position = Vector3.MoveTowards(transform.position, TargetPosition, Speed * Time.deltaTime);
-    }
+        }
+/*        void UpdateState()
+        {
+            bool isMoving = movement != Vector2.zero;
+            animator.SetBool("isMove", isMoving);
+            animator.SetFloat("xDir", movement.x);
+            animator.SetFloat("yDir", movement.y);
+        }*/
 }
