@@ -11,11 +11,24 @@ public class MoveController : MonoBehaviour
     Rigidbody2D rigidbody2D;
     public Vector3 Zv;
     Animator animator;
+    public bool canMove = true;
+    public PanelManager[] pnms;
+
 
     void Start()
     {
         animator = GetComponent<Animator>();
         rigidbody2D = GetComponent<Rigidbody2D>();
+        pnms = FindObjectsOfType<PanelManager>();
+
+    }
+
+    private bool CheckCanMove()
+    {
+        bool _temp = false;
+        for(int i = 0; i < pnms.Length; i++) if (pnms[i].GUIStatus) return _temp;
+        _temp = true;
+        return _temp;
     }
 
     void Update()
@@ -35,6 +48,7 @@ public class MoveController : MonoBehaviour
 
     void MoveCharacter()
     {
+        if (!CheckCanMove()) return;
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float verticalInput = Input.GetAxisRaw("Vertical");
 
@@ -54,6 +68,7 @@ public class MoveController : MonoBehaviour
 
     void UpdateState()
     {
+        if (!CheckCanMove()) return;
         bool isMoving = movement != Vector2.zero;
         animator.SetBool("isMove", isMoving);
         animator.SetFloat("xDir", movement.x);

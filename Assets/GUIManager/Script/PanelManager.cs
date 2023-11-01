@@ -60,6 +60,7 @@ public class PanelManager : MonoBehaviour
 
     void Update()
     {
+
         if (Input.GetKeyDown(GUIKey))
         {
             if (ExceptionObject != null && GameObject.Find(ExceptionObject) == true) return;
@@ -107,6 +108,7 @@ public class PanelManager : MonoBehaviour
         if (GUIStatus) EnableTrigger.Invoke();
         bool _status = GUIStatus;
         if (AlwaysShowCursor) _status = true;
+
         if (ShowCursor)
         {
             Cursor.visible = _status;
@@ -124,6 +126,7 @@ public class PanelManager : MonoBehaviour
         GUIBackground.SetActive(GUIStatus);
         if (GUIStatus) EnableTrigger.Invoke();
         bool _status = GUIStatus;
+
         if (AlwaysShowCursor) _status = true;
         if (ShowCursor)
         {
