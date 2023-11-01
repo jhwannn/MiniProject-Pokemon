@@ -13,8 +13,10 @@ public class PlayerMovement : MonoBehaviour
 
     public float Speed = 0f;
     public LayerMask TileCollision;
+    Vector2 movement = new Vector2();
 
-    Animator Anim;
+    Animator animator;
+    Rigidbody2D rigidbody2D;
     Vector3 TargetPosition;
     Direction Direction;
 
@@ -47,9 +49,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        Anim = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         TargetPosition = new Vector2(transform.position.x, transform.position.y);
         Direction = Direction.down;
+        rigidbody2D = GetComponent<Rigidbody2D>();
 
     }
 
@@ -57,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
     {
 
         Vector2 AxisInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        //Anim.SetInteger("Direccion", (int)Direction); //여기다가 애니메이션 넣으면 됩니다
+        //animator.SetInteger("Direccion", (int)Direction); 
 
         if (AxisInput != Vector2.zero && TargetPosition == transform.position)
         {
@@ -101,5 +104,13 @@ public class PlayerMovement : MonoBehaviour
             }
         }
         transform.position = Vector3.MoveTowards(transform.position, TargetPosition, Speed * Time.deltaTime);
-    }
+        }
+       void UpdateState()
+        {
+            bool isMoving = movement != Vector2.zero;
+            animator.SetBool("isMove", isMoving);
+            animator.SetFloat("xDir", movement.x);
+            animator.SetFloat("yDir", movement.y);
+        }
+        
 }

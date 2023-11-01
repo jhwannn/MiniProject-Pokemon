@@ -1,84 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
+
 
 public class MoveController : MonoBehaviour
 {
     public float movementSpeed = 3.0f;
     Vector2 movement = new Vector2();
     Rigidbody2D rigidbody2D;
-    float playerSize = 0.0f;
-    public Transform transform_W;
-    public Transform transform_A;
-    public Transform transform_S;
-    public Transform transform_D;
-
-    public Transform nowDir;
-
-    public float moveDelay = 0.5f;
-    public bool canMove = true;
-    public bool nowMove = false;
-
-    public float moveTime = 0.0f;
-
+    public Vector3 Zv;
     Animator animator;
 
     void Start()
     {
         animator = GetComponent<Animator>();
         rigidbody2D = GetComponent<Rigidbody2D>();
-        Debug.Log("SIZE : " + transform.localScale.x + " : " + transform.localScale.y);
     }
 
     void Update()
     {
-        //UpdateState();
-        if (!nowMove) {
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                transform.position = transform_W.position; nowMove = true; nowDir = transform_W;
-            }
-            else if (Input.GetKeyDown(KeyCode.S))
-            {
-                transform.position = transform_S.position; nowMove = true; nowDir = transform_S;
-            }
-            else if (Input.GetKeyDown(KeyCode.A))
-            {
-                transform.position = transform_A.position; nowMove = true; nowDir = transform_A;
-            }
-            else if (Input.GetKeyDown(KeyCode.D))
-            {
-                transform.position = transform_D.position; nowMove = true; nowDir = transform_D;
-            }
-            //StartCoroutine(LockMove());
-        }
-        if(nowMove)
-        {
-            if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D))
-            {
-                nowMove = false;
-                return;
-            }
-            moveTime += Time.deltaTime;
-            if (moveTime >= moveDelay)
-            {
-                moveTime = 0;
-                transform.position = nowDir.position;
-            }
-
-        }
-
+        UpdateState();
+        Zv.x = this.transform.position.x;
+        Zv.y = this.transform.position.y;
+        Zv.z = -10f;
+        Camera.main.gameObject.transform.position = Zv;
     }
-    
 
-
-    IEnumerator StopMove()
+    void FixedUpdate()
     {
+        MoveCharacter();
 
-        yield return null;
     }
-
-
 
     void MoveCharacter()
     {
