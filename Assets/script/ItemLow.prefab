@@ -254,6 +254,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ClickTrigger:
     m_PersistentCalls:
+      m_Calls: []
+  ChooseTrigger:
+    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1641779255552421332}
         m_TargetAssemblyTypeName: ItemPanelCtrl, Assembly-CSharp

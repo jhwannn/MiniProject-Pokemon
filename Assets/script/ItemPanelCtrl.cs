@@ -18,7 +18,6 @@ public class ItemPanelCtrl : MonoBehaviour
     
     public void ShowCount()
     {
-        Debug.Log("½ÇÇà");
         GameObject.Find("CountText").GetComponent<Text>().text = "X " + count;
     }
     
