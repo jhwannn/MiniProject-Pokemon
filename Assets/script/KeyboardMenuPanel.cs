@@ -21,6 +21,7 @@ public class KeyboardMenuPanel : MonoBehaviour
     public void SelectTrigger()
     {
         ClickTrigger.Invoke();
+
     }
     public void ChooseTriggerAction()
     {

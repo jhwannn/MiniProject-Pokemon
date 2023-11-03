@@ -9,6 +9,7 @@ public class PoketmonType : MonoBehaviour
     public string nameEng;
     public int LEVEL = 0;
     public int HP;
+    public int MAXHP;
     public float STR;
     public float SPD;
     public float SPECIAL;

@@ -10,8 +10,16 @@ public class PokemonZone : MonoBehaviour
     private PanelManager battleCtrlPnm;
     public Text DiagText;
     public Text NameText;
+    public Text TrainerNameText;
     public Image EnemyImg;
-
+    public Image PlayerPokemonImg;
+    public Animator trainerCtrl;
+    public Animator trainerPokemonCtrl;
+    public PlayerPokemon playerPokemonCtrl;
+    public GameObject skillRow;
+    public GameObject skillGroup;
+    public GameObject SkillMenu;
+    public BattleProcess battleProcess;
 
     public int percent;
 
@@ -20,6 +28,9 @@ public class PokemonZone : MonoBehaviour
     {
         battleCtrl = GameObject.Find("BattleCtrl").GetComponent<PokemonBattleCtrl>();
         battleCtrlPnm = GameObject.Find("BattleCtrl").GetComponent<PanelManager>();
+        playerPokemonCtrl = GameObject.Find("PlayerPokemon").GetComponent<PlayerPokemon>();
+        battleProcess = GameObject.Find("BattleProcess").GetComponent<BattleProcess>();
+
     }
 
     /*    private void OnTriggerStay2D(Collider2D collision)
@@ -47,13 +58,40 @@ public class PokemonZone : MonoBehaviour
                 DiagText.text = "야생의 " + pokemons[_rdm].nameKor + "이(가) 나타났다!";
                 EnemyImg.sprite = pokemons[_rdm].myCharImg_Front;
                 NameText.text = pokemons[_rdm].nameKor;
+                TrainerNameText.text = playerPokemonCtrl.pokemon.nameKor;
+                PlayerPokemonImg.sprite = playerPokemonCtrl.pokemon.myCharImg_Back;
 
 
+
+
+                foreach (SkillType _skill in playerPokemonCtrl.pokemon.skillList)
+                {
+                    GameObject _temp = Instantiate(skillRow);
+                    _temp.GetComponent<SkillRowCtrl>().SkillName.text = _skill.NameKR;
+                    _temp.GetComponent<SkillRowCtrl>()._mySkill = _skill;
+                    _temp.transform.SetParent(skillGroup.transform);
+                    _temp.GetComponent<KeyboardMenuPanel>().ClickTrigger = _skill.SkillTrigger;
+                    skillGroup.GetComponent<KeyboardMenuCtrl>()._panel.Add(_temp.GetComponent<KeyboardMenuPanel>());
+                }
+                GameObject.Find("BattleProcess").GetComponent<BattleProcess>().myPokemon = playerPokemonCtrl.pokemon;
+                skillGroup.GetComponent<KeyboardMenuCtrl>().OpenSet();
+                StartCoroutine(SkillView());
+                StartCoroutine(TrainerMove());
             }
-
-
         }
         
+    }
+
+    private IEnumerator TrainerMove()
+    {
+        yield return new WaitForSeconds(1f);
+        trainerCtrl.SetTrigger("Move");
+        trainerPokemonCtrl.SetTrigger("Move");
+    }
+    private IEnumerator SkillView()
+    {
+        yield return new WaitForSeconds(1.5f);
+        SkillMenu.SetActive(true);
     }
 
 }

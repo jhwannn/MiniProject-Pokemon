@@ -34,6 +34,7 @@ public class Pikachu : PoketmonType
         {
             LEVEL = Random.Range(0, 99);
             HP = Random.Range(10, 99);
+            MAXHP = HP;
             SPD = Random.Range(10, 99);
             STR = Random.Range(10, 99);
             SPECIAL = Random.Range(10, 99);
@@ -53,14 +54,7 @@ public class Pikachu : PoketmonType
         Debug.Log(GetData());
     }
     
-    public void 꼬리로내려치기()
-    {
 
-    }
-    public void 몸통박치기()
-    {
-
-    }
 
     
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Skill1 : SkillType
+public class Skill_Speed : SkillType
 {
 
 }

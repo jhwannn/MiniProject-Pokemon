@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3739275598639820821}
-  - component: {fileID: 3739275598639820826}
+  - component: {fileID: -6735301049464020337}
   m_Layer: 0
-  m_Name: "\uAF2C\uB9AC\uB0B4\uB824\uCE58\uAE30"
+  m_Name: Thunder_Shock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3739275598639820826
+--- !u!114 &-6735301049464020337
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,9 +41,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 3739275598639820820}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 142ccf9577b6de243a44271086384a24, type: 3}
+  m_Script: {fileID: 11500000, guid: 9463893ab07763947a853a0d01377ce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: "\uAF2C\uB9AC\uB0B4\uB824\uCC0D\uAE30"
-  Damage: 20
-  coolTime: 10
+  NameKR: "\uC804\uAE30\uC1FC\uD06C"
+  NameEng: Thunder Shock
+  Damage: 40
+  PowerPoint: 10
+  SkillTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -6735301049464020337}
+        m_TargetAssemblyTypeName: Skill_Special, Assembly-CSharp
+        m_MethodName: UseSkill
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  battleProcess: {fileID: 0}
+  _nowSkill: 0
