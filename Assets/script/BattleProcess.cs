@@ -20,6 +20,8 @@ public class BattleProcess : MonoBehaviour
 
     public GameObject SkillMenu;
 
+    public GameObject menuGroup;
+
     
 
 
@@ -38,7 +40,8 @@ public class BattleProcess : MonoBehaviour
         yield return new WaitForSeconds(1f);
         DialogText.text = myPokemon.nameKor + "ÀÇ" + _nameKr + "!";
         yield return new WaitForSeconds(1f);
-        SkillMenu.SetActive(true);
+        menuGroup.SetActive(true);
+
 
 
     }

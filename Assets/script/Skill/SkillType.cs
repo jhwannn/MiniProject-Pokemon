@@ -11,6 +11,11 @@ public class SkillType : MonoBehaviour
     public int PowerPoint;
     public UnityEvent SkillTrigger;
 
+    
+
+
+
+
 
 
     

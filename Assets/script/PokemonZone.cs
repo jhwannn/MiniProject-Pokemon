@@ -20,6 +20,8 @@ public class PokemonZone : MonoBehaviour
     public GameObject skillGroup;
     public GameObject SkillMenu;
     public BattleProcess battleProcess;
+    public FourWayKeyboardMenuCtrl battleMenuCtrl;
+    public GameObject battleMenuObj;
 
     public int percent;
 
@@ -74,20 +76,36 @@ public class PokemonZone : MonoBehaviour
                     skillGroup.GetComponent<KeyboardMenuCtrl>()._panel.Add(_temp.GetComponent<KeyboardMenuPanel>());
                 }
                 GameObject.Find("BattleProcess").GetComponent<BattleProcess>().myPokemon = playerPokemonCtrl.pokemon;
-                skillGroup.GetComponent<KeyboardMenuCtrl>().OpenSet();
-                StartCoroutine(SkillView());
+                //skillGroup.GetComponent<KeyboardMenuCtrl>().OpenSet();
+                //StartCoroutine(SkillView());
+                battleMenuCtrl.ResetMenu();
+                StartCoroutine(MenuView());
                 StartCoroutine(TrainerMove());
             }
         }
         
     }
 
+    public void ViewSkillMenu()
+    {
+        battleMenuObj.SetActive(false);
+        skillGroup.GetComponent<KeyboardMenuCtrl>().OpenSet();
+        SkillMenu.SetActive(true);
+    }
+
+
     private IEnumerator TrainerMove()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.7f);
         trainerCtrl.SetTrigger("Move");
         trainerPokemonCtrl.SetTrigger("Move");
     }
+    private IEnumerator MenuView()
+    {
+        yield return new WaitForSeconds(1f);
+        battleMenuObj.SetActive(true);
+    }
+
     private IEnumerator SkillView()
     {
         yield return new WaitForSeconds(1.5f);

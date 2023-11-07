@@ -22,6 +22,7 @@ public class Skill_Attack : SkillType
 
     public void UseSkill()
     {
+
         Debug.Log(_nowSkill.ToString() + "_Hit");
         string _skillName = _nowSkill.ToString() + "_Hit";
         GameObject.Find("BattleProcess").GetComponent<BattleProcess>().EnemyAnim(_skillName, base.NameKR);
