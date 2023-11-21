@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemName: MonsterBall
   ItemNameKR: "\uBAAC\uC2A4\uD130\uBCFC"
+  isBall: 1

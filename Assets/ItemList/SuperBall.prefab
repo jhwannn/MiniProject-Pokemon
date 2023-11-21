@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemName: SuperBall
   ItemNameKR: "\uC288\uD37C\uBCFC"
+  isBall: 1

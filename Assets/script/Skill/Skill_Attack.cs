@@ -8,7 +8,8 @@ public class Skill_Attack : SkillType
     public enum SkillList
     {
         QuickAttack,
-        Tackle
+        Tackle,
+        Cut
 
     }
     [SerializeField]
@@ -25,7 +26,7 @@ public class Skill_Attack : SkillType
 
         Debug.Log(_nowSkill.ToString() + "_Hit");
         string _skillName = _nowSkill.ToString() + "_Hit";
-        GameObject.Find("BattleProcess").GetComponent<BattleProcess>().EnemyAnim(_skillName, base.NameKR);
+        GameObject.Find("BattleProcess").GetComponent<BattleProcess>().EnemyAnim(_skillName, base.NameKR, base.Damage);
 
     }
 

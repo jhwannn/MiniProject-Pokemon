@@ -60,6 +60,7 @@ MonoBehaviour:
   - {fileID: 3739275598639820826, guid: 44e99681a9c795c4f8d3134f603d1fda, type: 3}
   - {fileID: -6735301049464020337, guid: 815fd6a03b605b944af0d0ad6a3b2d72, type: 3}
   - {fileID: 3739275598639820826, guid: e6a96cf1fcac1414893b9c8c38896781, type: 3}
+  - {fileID: 3739275598639820826, guid: 665c48ff6427ca643b2af6596ca52a48, type: 3}
   myNextMob: {fileID: 0}
   pokemonNature: {fileID: 8485660654983970521}
   nature: "\uACE0\uC9D1"

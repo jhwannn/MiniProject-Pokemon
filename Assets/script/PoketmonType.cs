@@ -8,8 +8,8 @@ public class PoketmonType : MonoBehaviour
     public string nameKor;
     public string nameEng;
     public int LEVEL = 0;
-    public int HP;
-    public int MAXHP;
+    public float HP;
+    public float MAXHP;
     public float STR;
     public float SPD;
     public float SPECIAL;
@@ -24,7 +24,18 @@ public class PoketmonType : MonoBehaviour
 
 
 
+    public void RandomPokeMon()
+    {
 
+        LEVEL = Random.Range(0, 99);
+        HP = Random.Range(10, 99) + 50;
+        MAXHP = HP;
+        SPD = Random.Range(10, 99);
+        STR = Random.Range(10, 99);
+        SPECIAL = Random.Range(10, 99);
+        PROTECT = Random.Range(10, 99);
+        Debug.Log(GetData());
+    }
 
 
     public virtual string GetData()

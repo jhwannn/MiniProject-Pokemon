@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NameKR: "\uC804\uAD11\uC11D\uD654"
   NameEng: Quick Attack
-  Damage: 40
+  Damage: 20
   PowerPoint: 10
   SkillTrigger:
     m_PersistentCalls:

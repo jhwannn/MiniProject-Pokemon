@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemName: HyperBall
   ItemNameKR: "\uD558\uC774\uD37C\uBCFC"
+  isBall: 1

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class InventoryCtrl : MonoBehaviour
 {
@@ -13,7 +14,23 @@ public class InventoryCtrl : MonoBehaviour
     public GameObject itemPrefab;
 
     public KeyboardMenuCtrl keyboardCtrl;
+    public UnityEvent BallTrigger;
+    public UnityEvent NoBallTrigger;
+    public PanelManager BallMenu;
 
+
+    public void Selectball()
+    {
+        if (GameObject.Find("BattleProcess").GetComponent<BattleProcess>().nowBattle)
+        {
+            BallMenu.GUIToggle(true);
+        }
+
+    }
+    public void DeSelectBall()
+    {
+        BallMenu.GUIToggle(false);
+    }
 
     private void Start()
     {
@@ -48,6 +65,7 @@ public class InventoryCtrl : MonoBehaviour
             _chatsLine.transform.SetParent(_targetInv.transform);
             _chatsLine.GetComponent<ItemPanelCtrl>().SetData(_item.Key.ItemNameKR, _item.Value, _item.Key);
             keyboardCtrl._panel.Add(_chatsLine.GetComponent<KeyboardMenuPanel>());
+            _chatsLine.GetComponent<KeyboardMenuPanel>().ChooseTrigger = BallTrigger;
 
         }
 

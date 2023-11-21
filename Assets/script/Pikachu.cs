@@ -28,7 +28,7 @@ public class Pikachu : PoketmonType
     }
 
 
-    private void RandomPokeMon()
+    public void RandomPokeMon()
     {
         if (LEVEL == 0)
         {

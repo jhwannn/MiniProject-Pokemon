@@ -7,7 +7,7 @@ public class PokemonZone : MonoBehaviour
 {
     public List<PoketmonType> pokemons;
     private PokemonBattleCtrl battleCtrl;
-    private PanelManager battleCtrlPnm;
+    public PanelManager battleCtrlPnm;
     public Text DiagText;
     public Text NameText;
     public Text TrainerNameText;
@@ -22,6 +22,7 @@ public class PokemonZone : MonoBehaviour
     public BattleProcess battleProcess;
     public FourWayKeyboardMenuCtrl battleMenuCtrl;
     public GameObject battleMenuObj;
+    
 
     public int percent;
 
@@ -56,16 +57,18 @@ public class PokemonZone : MonoBehaviour
             {
                 //포켓몬 등장!
                 int _rdm = Random.Range(0, pokemons.Count);
+                pokemons[_rdm].RandomPokeMon();
                 battleCtrlPnm.GUIToggle(true);
                 DiagText.text = "야생의 " + pokemons[_rdm].nameKor + "이(가) 나타났다!";
                 EnemyImg.sprite = pokemons[_rdm].myCharImg_Front;
                 NameText.text = pokemons[_rdm].nameKor;
                 TrainerNameText.text = playerPokemonCtrl.pokemon.nameKor;
                 PlayerPokemonImg.sprite = playerPokemonCtrl.pokemon.myCharImg_Back;
-
-
-
-
+                foreach (Transform child in skillGroup.transform)
+                {
+                    Destroy(child.gameObject);
+                }
+                skillGroup.GetComponent<KeyboardMenuCtrl>()._panel.Clear();
                 foreach (SkillType _skill in playerPokemonCtrl.pokemon.skillList)
                 {
                     GameObject _temp = Instantiate(skillRow);
@@ -75,6 +78,9 @@ public class PokemonZone : MonoBehaviour
                     _temp.GetComponent<KeyboardMenuPanel>().ClickTrigger = _skill.SkillTrigger;
                     skillGroup.GetComponent<KeyboardMenuCtrl>()._panel.Add(_temp.GetComponent<KeyboardMenuPanel>());
                 }
+                GameObject.Find("BattleProcess").GetComponent<BattleProcess>().nowBattle = true;
+                GameObject.Find("BattleProcess").GetComponent<BattleProcess>().enemyPokemon = pokemons[_rdm];
+
                 GameObject.Find("BattleProcess").GetComponent<BattleProcess>().myPokemon = playerPokemonCtrl.pokemon;
                 //skillGroup.GetComponent<KeyboardMenuCtrl>().OpenSet();
                 //StartCoroutine(SkillView());
@@ -88,15 +94,19 @@ public class PokemonZone : MonoBehaviour
 
     public void ViewSkillMenu()
     {
+        Debug.Log("1");
         battleMenuObj.SetActive(false);
+        Debug.Log("2");
         skillGroup.GetComponent<KeyboardMenuCtrl>().OpenSet();
+        Debug.Log("3");
+
         SkillMenu.SetActive(true);
     }
 
 
     private IEnumerator TrainerMove()
     {
-        yield return new WaitForSeconds(0.7f);
+        yield return new WaitForSeconds(1.5f);
         trainerCtrl.SetTrigger("Move");
         trainerPokemonCtrl.SetTrigger("Move");
     }

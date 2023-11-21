@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NameKR: "\uBAB8\uD1B5\uBC15\uCE58\uAE30"
   NameEng: Tackle
-  Damage: 40
+  Damage: 20
   PowerPoint: 10
   SkillTrigger:
     m_PersistentCalls:

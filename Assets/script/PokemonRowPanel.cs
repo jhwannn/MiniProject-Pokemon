@@ -10,7 +10,7 @@ public class PokemonRowPanel : MonoBehaviour
     public Image _hpImage;
     public Text _LV;
 
-    public void SetRow(string name, int nowHp, int maxHp, int lv)
+    public void SetRow(string name, float nowHp, float maxHp, int lv)
     {
         _name.text = name;
         _hpImage.fillAmount = nowHp / maxHp;

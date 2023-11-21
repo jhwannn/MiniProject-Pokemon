@@ -24,7 +24,7 @@ public class Skill_Special : SkillType
 
         Debug.Log(_nowSkill.ToString() + "_Hit");
         string _skillName = _nowSkill.ToString() + "_Hit";
-        GameObject.Find("BattleProcess").GetComponent<BattleProcess>().EnemyAnim(_skillName, base.NameKR);
+        GameObject.Find("BattleProcess").GetComponent<BattleProcess>().EnemyAnim(_skillName, base.NameKR, base.Damage);
 
     }
 

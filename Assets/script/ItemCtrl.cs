@@ -6,4 +6,5 @@ public class ItemCtrl : MonoBehaviour
 {
     public string ItemName;
     public string ItemNameKR;
+    public bool isBall;
 }
