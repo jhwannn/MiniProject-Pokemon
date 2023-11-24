@@ -12,6 +12,8 @@ public class KeyboardMenuPanel : MonoBehaviour
     [SerializeField]
     private GameObject mySelIcon;
 
+    public int PokemonSel;
+
 
 
     public void SetStatus(bool _type)
@@ -20,7 +22,13 @@ public class KeyboardMenuPanel : MonoBehaviour
     }
     public void SelectTrigger()
     {
+        if(PokemonSel != null && GameObject.Find("BattleProcess").GetComponent<BattleProcess>().nowBattle)
+        {
+            GameObject.Find("BattleProcess").GetComponent<BattleProcess>().ChangePokemon(PokemonSel);
+        }
+ 
         ClickTrigger.Invoke();
+
 
     }
     public void ChooseTriggerAction()

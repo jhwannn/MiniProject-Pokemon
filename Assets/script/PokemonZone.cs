@@ -22,9 +22,15 @@ public class PokemonZone : MonoBehaviour
     public BattleProcess battleProcess;
     public FourWayKeyboardMenuCtrl battleMenuCtrl;
     public GameObject battleMenuObj;
+    public GameObject EnemyEffectGroup;
+    public GameObject TrainerEffectGroup;
+
+    public float num;
     
 
     public int percent;
+
+
 
 
     private void Start()
@@ -47,13 +53,72 @@ public class PokemonZone : MonoBehaviour
 
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void ResetPokemon(bool isChange)
     {
-        if(collision.tag == "Player")
+
+        TrainerNameText.text = playerPokemonCtrl.pokemon.nameKor;
+        
+        foreach (Transform child in skillGroup.transform)
         {
+            Destroy(child.gameObject);
+        }
+        skillGroup.GetComponent<KeyboardMenuCtrl>()._panel.Clear();
+        GameObject.Find("BattleProcess").GetComponent<BattleProcess>().myPokemon = playerPokemonCtrl.pokemon;
+        GameObject.Find("BattleProcess").GetComponent<BattleProcess>().ResetHP();
+        foreach (SkillType _skill in playerPokemonCtrl.pokemon.skillList)
+        {
+            GameObject _temp = Instantiate(skillRow);
+            _temp.GetComponent<SkillRowCtrl>().SkillName.text = _skill.NameKR;
+            _temp.GetComponent<SkillRowCtrl>()._mySkill = _skill;
+            _temp.transform.SetParent(skillGroup.transform);
+            _temp.GetComponent<KeyboardMenuPanel>().ClickTrigger = _skill.SkillTrigger;
+            skillGroup.GetComponent<KeyboardMenuCtrl>()._panel.Add(_temp.GetComponent<KeyboardMenuPanel>());
+        }
+        battleMenuCtrl.ResetMenu();
+        StartCoroutine(MenuView());
+        if (isChange)
+        {
+            StartCoroutine(ChangeImgWait());
+            trainerPokemonCtrl.SetTrigger("ChangePokemon");
+        }
+        else
+        {
+            PlayerPokemonImg.sprite = playerPokemonCtrl.pokemon.myCharImg_Back;
+            trainerPokemonCtrl.SetTrigger("Move");
+        }
+
+    }
+    public IEnumerator ChangeImgWait()
+    {
+        yield return new WaitForSeconds(0.15f);
+        PlayerPokemonImg.sprite = playerPokemonCtrl.pokemon.myCharImg_Back;
+    }
+
+
+    public void CallView()
+    {
+        battleMenuCtrl.ResetMenu();
+        StartCoroutine(MenuView());
+        StartCoroutine(TrainerMove());
+    }
+    
+    public void CheckZone(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            int i = 0;
+            foreach (PoketmonType _pkm in playerPokemonCtrl.pokemonList)
+            {
+                if (_pkm.HP > 0)
+                {
+                    i++;
+                }
+            }
+            if (i == 0) return;
+
             Debug.Log("충돌");
             int _per = Random.Range(1, 101);
-            if(_per <= percent)
+            if (_per <= percent)
             {
                 //포켓몬 등장!
                 int _rdm = Random.Range(0, pokemons.Count);
@@ -62,34 +127,34 @@ public class PokemonZone : MonoBehaviour
                 DiagText.text = "야생의 " + pokemons[_rdm].nameKor + "이(가) 나타났다!";
                 EnemyImg.sprite = pokemons[_rdm].myCharImg_Front;
                 NameText.text = pokemons[_rdm].nameKor;
-                TrainerNameText.text = playerPokemonCtrl.pokemon.nameKor;
-                PlayerPokemonImg.sprite = playerPokemonCtrl.pokemon.myCharImg_Back;
-                foreach (Transform child in skillGroup.transform)
-                {
-                    Destroy(child.gameObject);
-                }
-                skillGroup.GetComponent<KeyboardMenuCtrl>()._panel.Clear();
-                foreach (SkillType _skill in playerPokemonCtrl.pokemon.skillList)
-                {
-                    GameObject _temp = Instantiate(skillRow);
-                    _temp.GetComponent<SkillRowCtrl>().SkillName.text = _skill.NameKR;
-                    _temp.GetComponent<SkillRowCtrl>()._mySkill = _skill;
-                    _temp.transform.SetParent(skillGroup.transform);
-                    _temp.GetComponent<KeyboardMenuPanel>().ClickTrigger = _skill.SkillTrigger;
-                    skillGroup.GetComponent<KeyboardMenuCtrl>()._panel.Add(_temp.GetComponent<KeyboardMenuPanel>());
-                }
+                ResetPokemon(false);
+
+
+                GameObject.Find("BattleProcess").GetComponent<BattleProcess>().currentZone = gameObject.GetComponent<PokemonZone>();
+                GameObject.Find("BattleProcess").GetComponent<BattleProcess>().myPokemon = playerPokemonCtrl.pokemon;
+                GameObject.Find("BattleProcess").GetComponent<BattleProcess>().ResetHP();
                 GameObject.Find("BattleProcess").GetComponent<BattleProcess>().nowBattle = true;
                 GameObject.Find("BattleProcess").GetComponent<BattleProcess>().enemyPokemon = pokemons[_rdm];
 
-                GameObject.Find("BattleProcess").GetComponent<BattleProcess>().myPokemon = playerPokemonCtrl.pokemon;
                 //skillGroup.GetComponent<KeyboardMenuCtrl>().OpenSet();
                 //StartCoroutine(SkillView());
-                battleMenuCtrl.ResetMenu();
-                StartCoroutine(MenuView());
-                StartCoroutine(TrainerMove());
+                CallView();
             }
         }
-        
+
+    }
+
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag != "Player") return;
+        num += Time.deltaTime;
+        if(num >= 1)
+        {
+            num = 0;
+            CheckZone(collision);
+            return;
+        }
     }
 
     public void ViewSkillMenu()
@@ -106,7 +171,7 @@ public class PokemonZone : MonoBehaviour
 
     private IEnumerator TrainerMove()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.0f);
         trainerCtrl.SetTrigger("Move");
         trainerPokemonCtrl.SetTrigger("Move");
     }

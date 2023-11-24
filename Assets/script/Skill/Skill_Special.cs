@@ -8,6 +8,7 @@ public class Skill_Special : SkillType
     public enum SkillList
     {
         ThunderShock,
+        Spark
 
     }
     [SerializeField]
@@ -16,7 +17,11 @@ public class Skill_Special : SkillType
     private void Awake()
     {
         battleProcess = GameObject.Find("BattleProcess").GetComponent<BattleProcess>();
-
+        
+    }
+    private void Start()
+    {
+        base.nowSkill = _nowSkill.ToString();
     }
 
     public void UseSkill()

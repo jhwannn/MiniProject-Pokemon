@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NameKR: "\uC804\uAE30\uC1FC\uD06C"
   NameEng: Thunder Shock
-  Damage: 400
+  Damage: 40
   PowerPoint: 10
   SkillTrigger:
     m_PersistentCalls:

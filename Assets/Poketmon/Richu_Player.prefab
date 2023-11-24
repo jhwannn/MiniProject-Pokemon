@@ -48,8 +48,8 @@ MonoBehaviour:
   nameKor: "\uB77C\uC774\uCE04"
   nameEng: Richu
   LEVEL: 5
-  HP: 30
-  MAXHP: 30
+  HP: 100
+  MAXHP: 100
   STR: 4
   SPD: 4
   SPECIAL: 4

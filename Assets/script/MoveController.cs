@@ -48,7 +48,7 @@ public class MoveController : MonoBehaviour
 
     void MoveCharacter()
     {
-        if (!CheckCanMove()) return;
+        
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float verticalInput = Input.GetAxisRaw("Vertical");
 
@@ -62,13 +62,23 @@ public class MoveController : MonoBehaviour
         movement.x = horizontalInput;
         movement.y = verticalInput;
         movement.Normalize();
+        if (!CheckCanMove())
+        {
+            rigidbody2D.velocity = Vector2.zero;
+            return;
+        }
 
         rigidbody2D.velocity = movement * movementSpeed;
     }
 
     void UpdateState()
     {
-        if (!CheckCanMove()) return;
+        if (!CheckCanMove())
+        {
+            animator.SetBool("isMove", false);
+
+            return;
+        }
         bool isMoving = movement != Vector2.zero;
         animator.SetBool("isMove", isMoving);
         animator.SetFloat("xDir", movement.x);

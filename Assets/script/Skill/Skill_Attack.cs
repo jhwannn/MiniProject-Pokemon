@@ -9,15 +9,21 @@ public class Skill_Attack : SkillType
     {
         QuickAttack,
         Tackle,
-        Cut
+        Cut,
+        Slash
 
     }
     [SerializeField]
-    SkillList _nowSkill;
+    public SkillList _nowSkill;
 
     private void Awake()
     {
         battleProcess = GameObject.Find("BattleProcess").GetComponent<BattleProcess>();
+
+    }
+    private void Start()
+    {
+        base.nowSkill = _nowSkill.ToString();
 
     }
 

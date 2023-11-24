@@ -10,14 +10,15 @@ public class SkillType : MonoBehaviour
     public int Damage;
     public int PowerPoint;
     public UnityEvent SkillTrigger;
-
-    
-
+    public string nowSkill;
 
 
 
 
 
-    
-    
+
+
+
+
+
 }
