@@ -12,6 +12,26 @@ public class Pikachu : PoketmonType
 
     public float settingSTR;
 
+    public Pikachu(PoketmonType _pokemon)
+    {
+        nameKor = _pokemon.nameKor;
+        nameEng = _pokemon.nameEng;
+        LEVEL = _pokemon.LEVEL;
+        HP = _pokemon.HP;
+        MAXHP = _pokemon.MAXHP;
+        STR = _pokemon.STR;
+        SPD = _pokemon.SPD;
+        SPECIAL = _pokemon.SPECIAL;
+        PROTECT = _pokemon.PROTECT;
+        EXP = _pokemon.EXP;
+        MAXEXP = _pokemon.MAXEXP;
+        myCharImg_Front = _pokemon.myCharImg_Front;
+        myCharImg_Back = _pokemon.myCharImg_Back;
+        skillList = _pokemon.skillList;
+        myNextMob = _pokemon.myNextMob;
+
+    }
+
 
     private void Start() {
         if(isRandom) RandomPokeMon();

@@ -308,6 +308,7 @@ MonoBehaviour:
   OpenningTex: {fileID: 8400000, guid: b2d470a1974747a47a3c08f9493cd25b, type: 2}
   BeforeStartTex: {fileID: 8400000, guid: d256203bf8ede224ead612f753fbe6fd, type: 2}
   BeforePlayer: {fileID: 1669924457}
+  canSkip: 0
 --- !u!4 &564829701
 Transform:
   m_ObjectHideFlags: 0
@@ -617,7 +618,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1669924455}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: ea8a7fab137421e409281e4a3f49dffb, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 35cda8be674397343b1a00080a62216d, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}

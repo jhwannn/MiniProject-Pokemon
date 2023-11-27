@@ -6,6 +6,7 @@ public class FourWayKeyboardMenuCtrl : MonoBehaviour
 {
     public List<FourWayKeyboardMenuPanel> _menu;
     int nowIndex = 0;
+    public List<GameObject> target;
     
 
     public void ResetMenu()
@@ -32,10 +33,23 @@ public class FourWayKeyboardMenuCtrl : MonoBehaviour
 
     }
 
+    public bool CheckUI()
+    {
+        foreach(GameObject _obj in target)
+        {
+            if(_obj.active == true)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
 
     private void Update()
     {
+        if (!CheckUI()) return;
         if (Input.GetKeyDown(KeyCode.Return))
         {
 

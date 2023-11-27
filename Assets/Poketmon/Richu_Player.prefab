@@ -47,13 +47,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameKor: "\uB77C\uC774\uCE04"
   nameEng: Richu
-  LEVEL: 5
-  HP: 100
-  MAXHP: 100
+  LEVEL: 1
+  HP: 300
+  MAXHP: 300
   STR: 4
   SPD: 4
   SPECIAL: 4
   PROTECT: 4
+  EXP: 0
+  MAXEXP: 350
   myCharImg_Front: {fileID: 21300000, guid: 1d701d882b9e36845a3d8d7d88fcec3e, type: 3}
   myCharImg_Back: {fileID: 21300000, guid: 0d41c2282b0a0cd48854290be3438033, type: 3}
   skillList:

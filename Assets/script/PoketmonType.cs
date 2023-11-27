@@ -14,6 +14,8 @@ public class PoketmonType : MonoBehaviour
     public float SPD;
     public float SPECIAL;
     public float PROTECT;
+    public int EXP;
+    public int MAXEXP;
     public Sprite myCharImg_Front;
     public Sprite myCharImg_Back;
     public List<SkillType> skillList = new List<SkillType>();
@@ -24,13 +26,18 @@ public class PoketmonType : MonoBehaviour
 
 
 
+
+
+
     public void RandomPokeMon()
     {
 
-        LEVEL = Random.Range(0, 99);
+        LEVEL = Random.Range(1, 10);
         HP = Random.Range(10, 99) + 50;
         MAXHP = HP;
         SPD = Random.Range(10, 99);
+        EXP = 0;
+        MAXEXP = 200;
         STR = Random.Range(10, 99);
         SPECIAL = Random.Range(10, 99);
         PROTECT = Random.Range(10, 99);

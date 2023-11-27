@@ -83,7 +83,7 @@ public class PanelManager : MonoBehaviour
 
     private void PlaySound(bool _status)
     {
-        if (_status)
+/*        if (_status)
         {
             if (OpenSound == null) return;
             guiAudio.clip = OpenSound;
@@ -92,7 +92,7 @@ public class PanelManager : MonoBehaviour
             if (CloseSound == null) return;
             guiAudio.clip = CloseSound;
         }
-        guiAudio.Play();
+        guiAudio.Play();*/
 
     }
  

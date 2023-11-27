@@ -24,6 +24,7 @@ public class PokemonZone : MonoBehaviour
     public GameObject battleMenuObj;
     public GameObject EnemyEffectGroup;
     public GameObject TrainerEffectGroup;
+    public Image trainerExpBar;
 
     public float num;
     
@@ -56,7 +57,7 @@ public class PokemonZone : MonoBehaviour
     public void ResetPokemon(bool isChange)
     {
 
-        TrainerNameText.text = playerPokemonCtrl.pokemon.nameKor;
+        TrainerNameText.text = playerPokemonCtrl.pokemon.nameKor+":L"+ playerPokemonCtrl.pokemon.LEVEL;
         
         foreach (Transform child in skillGroup.transform)
         {
@@ -65,6 +66,7 @@ public class PokemonZone : MonoBehaviour
         skillGroup.GetComponent<KeyboardMenuCtrl>()._panel.Clear();
         GameObject.Find("BattleProcess").GetComponent<BattleProcess>().myPokemon = playerPokemonCtrl.pokemon;
         GameObject.Find("BattleProcess").GetComponent<BattleProcess>().ResetHP();
+        trainerExpBar.fillAmount = playerPokemonCtrl.pokemon.EXP / playerPokemonCtrl.pokemon.MAXEXP;
         foreach (SkillType _skill in playerPokemonCtrl.pokemon.skillList)
         {
             GameObject _temp = Instantiate(skillRow);
@@ -79,6 +81,7 @@ public class PokemonZone : MonoBehaviour
         if (isChange)
         {
             StartCoroutine(ChangeImgWait());
+            //Debug.Log("설마 호출?");
             trainerPokemonCtrl.SetTrigger("ChangePokemon");
         }
         else
@@ -126,7 +129,7 @@ public class PokemonZone : MonoBehaviour
                 battleCtrlPnm.GUIToggle(true);
                 DiagText.text = "야생의 " + pokemons[_rdm].nameKor + "이(가) 나타났다!";
                 EnemyImg.sprite = pokemons[_rdm].myCharImg_Front;
-                NameText.text = pokemons[_rdm].nameKor;
+                NameText.text = pokemons[_rdm].nameKor+":L"+ pokemons[_rdm].LEVEL;
                 ResetPokemon(false);
 
 
@@ -159,11 +162,8 @@ public class PokemonZone : MonoBehaviour
 
     public void ViewSkillMenu()
     {
-        Debug.Log("1");
         battleMenuObj.SetActive(false);
-        Debug.Log("2");
         skillGroup.GetComponent<KeyboardMenuCtrl>().OpenSet();
-        Debug.Log("3");
 
         SkillMenu.SetActive(true);
     }

@@ -8,6 +8,7 @@ public class PlayerPokemon : MonoBehaviour
     public List<PoketmonType> pokemonList = new List<PoketmonType>();
     public GameObject parentObject;
     public GameObject _prefab;
+    public GameObject isExitObj;
 
 
 
@@ -15,6 +16,7 @@ public class PlayerPokemon : MonoBehaviour
     {
         foreach (Transform child in parentObject.transform)
         {
+            if(child.name != "ExitRow")
             Destroy(child.gameObject);
         }
     }
@@ -24,6 +26,7 @@ public class PlayerPokemon : MonoBehaviour
     {
         RemoveAllChild();
         parentObject.GetComponent<KeyboardMenuCtrl>()._panel = new List<KeyboardMenuPanel>();
+        parentObject.GetComponent<KeyboardMenuCtrl>()._panel.Add(isExitObj.GetComponent<KeyboardMenuPanel>());
         int i = 0;
         foreach (PoketmonType pkm in pokemonList)
         {
@@ -32,6 +35,7 @@ public class PlayerPokemon : MonoBehaviour
             _temp.transform.SetParent(parentObject.transform);
             parentObject.GetComponent<KeyboardMenuCtrl>()._panel.Add(_temp.GetComponent<KeyboardMenuPanel>());
             _temp.GetComponent<KeyboardMenuPanel>().PokemonSel = i;
+            _temp.GetComponent<KeyboardMenuPanel>().isPkm = true;
             i++;
 
         }

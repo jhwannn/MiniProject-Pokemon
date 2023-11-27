@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8282622669490856078}
   - component: {fileID: 8485660654983970521}
   m_Layer: 0
-  m_Name: Evee
+  m_Name: Evee_Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,9 +47,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameKor: "\uC774\uBE0C\uC774"
   nameEng: Evee
-  LEVEL: 8
-  HP: 143
-  MAXHP: 143
+  LEVEL: 3
+  HP: 200
+  MAXHP: 200
   STR: 69
   SPD: 19
   SPECIAL: 36

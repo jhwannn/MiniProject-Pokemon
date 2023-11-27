@@ -7,7 +7,10 @@ public class KeyboardMenuCtrl : MonoBehaviour
     public List<KeyboardMenuPanel> _panel;
 
 
-    private int nowSel = 0;
+    public int nowSel = 0;
+
+    public GameObject TargetObj;
+    public GameObject _checkObjTemp;
 
 
 
@@ -15,6 +18,9 @@ public class KeyboardMenuCtrl : MonoBehaviour
 
     public void OpenSet()
     {
+
+        
+        if(_panel.Count-1< nowSel) nowSel = 0;
         AllDeSel();
         _panel[nowSel].SetStatus(true);
     }
@@ -25,14 +31,24 @@ public class KeyboardMenuCtrl : MonoBehaviour
 
     private void Update()
     {
+        if (gameObject.name == "BAGSystem")
+        {
+            if(TargetObj.active == true)
+            {
+                return;
+            }
+        }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             if (nowSel + 1 < _panel.Count)
             {
+
                 nowSel++;
                 AllDeSel();
                 _panel[nowSel].SetStatus(true);
                 _panel[nowSel].ChooseTriggerAction();
+                Debug.Log("Down ¼¿¹øÈ£  " + nowSel);
+
             }
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -43,11 +59,14 @@ public class KeyboardMenuCtrl : MonoBehaviour
                 AllDeSel();
                 _panel[nowSel].SetStatus(true);
                 _panel[nowSel].ChooseTriggerAction();
+                Debug.Log("Up ¼¿¹øÈ£  " + nowSel);
+
 
             }
         }
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            Debug.Log("¼¿¹øÈ£  " + nowSel);
             _panel[nowSel].SelectTrigger();
         }
 

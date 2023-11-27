@@ -18,6 +18,12 @@ public class InventoryCtrl : MonoBehaviour
     public UnityEvent NoBallTrigger;
     public PanelManager BallMenu;
 
+    public void SetDisable()
+    {
+        BallMenu.GUIToggle(false);
+
+    }
+
 
     public void Selectball()
     {
@@ -65,7 +71,7 @@ public class InventoryCtrl : MonoBehaviour
             _chatsLine.transform.SetParent(_targetInv.transform);
             _chatsLine.GetComponent<ItemPanelCtrl>().SetData(_item.Key.ItemNameKR, _item.Value, _item.Key);
             keyboardCtrl._panel.Add(_chatsLine.GetComponent<KeyboardMenuPanel>());
-            _chatsLine.GetComponent<KeyboardMenuPanel>().ChooseTrigger = BallTrigger;
+            _chatsLine.GetComponent<KeyboardMenuPanel>().ClickTrigger = BallTrigger;
 
         }
 

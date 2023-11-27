@@ -13,6 +13,7 @@ public class KeyboardMenuPanel : MonoBehaviour
     private GameObject mySelIcon;
 
     public int PokemonSel;
+    public bool isPkm;
 
 
 
@@ -22,8 +23,9 @@ public class KeyboardMenuPanel : MonoBehaviour
     }
     public void SelectTrigger()
     {
-        if(PokemonSel != null && GameObject.Find("BattleProcess").GetComponent<BattleProcess>().nowBattle)
+        if(isPkm && GameObject.Find("BattleProcess").GetComponent<BattleProcess>().nowBattle)
         {
+            Debug.Log("select 2");
             GameObject.Find("BattleProcess").GetComponent<BattleProcess>().ChangePokemon(PokemonSel);
         }
  

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GUI
   - MenuGroup
+  - SearchUseMenu
   layers:
   - Default
   - TransparentFX
