@@ -110,10 +110,18 @@ public class PokemonZone : MonoBehaviour
         if (collision.tag == "Player")
         {
             int i = 0;
+            PoketmonType _pkmTemp = null;
+            bool isSet = false;
             foreach (PoketmonType _pkm in playerPokemonCtrl.pokemonList)
             {
                 if (_pkm.HP > 0)
                 {
+                    if (isSet == false) 
+                    {
+                        isSet = true;
+                        _pkmTemp = _pkm;
+                    };
+                    Debug.Log("ㅍㅋㅁ : " + _pkm.nameKor);
                     i++;
                 }
             }
@@ -130,11 +138,14 @@ public class PokemonZone : MonoBehaviour
                 DiagText.text = "야생의 " + pokemons[_rdm].nameKor + "이(가) 나타났다!";
                 EnemyImg.sprite = pokemons[_rdm].myCharImg_Front;
                 NameText.text = pokemons[_rdm].nameKor+":L"+ pokemons[_rdm].LEVEL;
-                ResetPokemon(false);
 
 
                 GameObject.Find("BattleProcess").GetComponent<BattleProcess>().currentZone = gameObject.GetComponent<PokemonZone>();
+                playerPokemonCtrl.pokemon = _pkmTemp;
+                Debug.Log("템프 : " + _pkmTemp.nameKor);
+                Debug.Log("컨트롤러 : " + playerPokemonCtrl.pokemon.nameKor);
                 GameObject.Find("BattleProcess").GetComponent<BattleProcess>().myPokemon = playerPokemonCtrl.pokemon;
+                ResetPokemon(false);
                 GameObject.Find("BattleProcess").GetComponent<BattleProcess>().ResetHP();
                 GameObject.Find("BattleProcess").GetComponent<BattleProcess>().nowBattle = true;
                 GameObject.Find("BattleProcess").GetComponent<BattleProcess>().enemyPokemon = pokemons[_rdm];

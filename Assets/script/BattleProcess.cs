@@ -328,7 +328,7 @@ public class BattleProcess : MonoBehaviour
             else RevPkmImg.sprite = myPokemon.myNextMob.myCharImg_Front;
         }
         yield return new WaitForSeconds(0.5f);
-        DialogText.text = "축하합니다! "+ myPokemon.nameKor+"는(은)\n"+ myPokemon.myNextMob.nameKor+"(으)로 \n진화했다!";
+        DialogText.text = "축하합니다! "+ myPokemon.nameKor+"는(은)\n"+ myPokemon.myNextMob.nameKor+"(으)로 진화했다!";
         int e = 0;
         foreach(PoketmonType _pkm in playerPokemon.pokemonList)
         {
@@ -341,7 +341,13 @@ public class BattleProcess : MonoBehaviour
             e++;
 
         }
-        playerPokemon.pokemonList[e] = myPokemon.myNextMob;
+        Pikachu _new = new Pikachu(myPokemon.myNextMob);
+        _new.EXP = myPokemon.EXP;
+        _new.MAXEXP = myPokemon.MAXEXP;
+        _new.LEVEL = myPokemon.LEVEL;
+        _new.skillList = myPokemon.skillList;
+        playerPokemon.pokemonList[e] = _new;
+        myPokemon = _new;
 
         yield return new WaitForSeconds(2f);
         battleCtrlPnm.GUIToggle(false);

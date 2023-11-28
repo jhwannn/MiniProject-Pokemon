@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NameKR: "\uC2A4\uD30C\uD06C"
   NameEng: Spark
-  Damage: 30
+  Damage: 1000
   PowerPoint: 10
   SkillTrigger:
     m_PersistentCalls:
@@ -63,5 +63,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  nowSkill: 
   battleProcess: {fileID: 0}
   _nowSkill: 1
