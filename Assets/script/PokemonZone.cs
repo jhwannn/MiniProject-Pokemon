@@ -11,6 +11,7 @@ public class PokemonZone : MonoBehaviour
     public Text DiagText;
     public Text NameText;
     public Text TrainerNameText;
+    public GameObject EnemyPosCtrl;
     public Image EnemyImg;
     public Image PlayerPokemonImg;
     public Animator trainerCtrl;
@@ -25,6 +26,16 @@ public class PokemonZone : MonoBehaviour
     public GameObject EnemyEffectGroup;
     public GameObject TrainerEffectGroup;
     public Image trainerExpBar;
+    public Animator enemyLeaderAnim;
+    public Animator enemyPokemonAnim;
+    public bool isNpcBattle;
+    public bool isBattleStart = false;
+    public int battleCursor = 0;
+    Vector3 currentTrainerPokemonPos;
+    public string NPCNAME;
+    public bool isEnter;
+    public NPCCtrl myNPC;
+    
 
     public float num;
     
@@ -36,6 +47,7 @@ public class PokemonZone : MonoBehaviour
 
     private void Start()
     {
+        currentTrainerPokemonPos = PlayerPokemonImg.gameObject.transform.position;
         battleCtrl = GameObject.Find("BattleCtrl").GetComponent<PokemonBattleCtrl>();
         battleCtrlPnm = GameObject.Find("BattleCtrl").GetComponent<PanelManager>();
         playerPokemonCtrl = GameObject.Find("PlayerPokemon").GetComponent<PlayerPokemon>();
@@ -54,7 +66,7 @@ public class PokemonZone : MonoBehaviour
 
 
 
-    public void ResetPokemon(bool isChange)
+    public void ResetPokemon(bool isChange, bool isCall)
     {
 
         TrainerNameText.text = playerPokemonCtrl.pokemon.nameKor+":L"+ playerPokemonCtrl.pokemon.LEVEL;
@@ -77,24 +89,39 @@ public class PokemonZone : MonoBehaviour
             skillGroup.GetComponent<KeyboardMenuCtrl>()._panel.Add(_temp.GetComponent<KeyboardMenuPanel>());
         }
         battleMenuCtrl.ResetMenu();
-        StartCoroutine(MenuView());
+        
         if (isChange)
         {
             StartCoroutine(ChangeImgWait());
-            //Debug.Log("설마 호출?");
             trainerPokemonCtrl.SetTrigger("ChangePokemon");
         }
         else
         {
             PlayerPokemonImg.sprite = playerPokemonCtrl.pokemon.myCharImg_Back;
-            trainerPokemonCtrl.SetTrigger("Move");
+            if(isCall)StartCoroutine(SpawnPokemonWait());
+            else StartCoroutine(MenuView());
+
         }
 
+    }
+    public IEnumerator SpawnPokemonWait()
+    {
+        yield return new WaitForSeconds(1.5f);
+        trainerPokemonCtrl.SetTrigger("Move");
+        StartCoroutine(SpawnPokemonWai2t());
+    }
+
+    public IEnumerator SpawnPokemonWai2t()
+    {
+        yield return new WaitForSeconds(0.3f);
+        DiagText.text = "가랏! " + playerPokemonCtrl.pokemon.nameKor + "!!";
+        StartCoroutine(MenuView());
     }
     public IEnumerator ChangeImgWait()
     {
         yield return new WaitForSeconds(0.15f);
         PlayerPokemonImg.sprite = playerPokemonCtrl.pokemon.myCharImg_Back;
+        StartCoroutine(MenuView());
     }
 
 
@@ -102,9 +129,89 @@ public class PokemonZone : MonoBehaviour
     {
         battleMenuCtrl.ResetMenu();
         StartCoroutine(MenuView());
-        StartCoroutine(TrainerMove());
+        StartCoroutine(TrainerMove(true));
     }
-    
+
+    public void NPCBattle(string _name, NPCCtrl npc)
+    {
+        myNPC = npc;
+        myNPC.TextCursor = 0;
+        NPCNAME = _name;
+        isNpcBattle = true;
+        PlayerPokemonImg.gameObject.transform.position = currentTrainerPokemonPos;
+        EnemyPosCtrl.transform.position = enemyLeaderAnim.gameObject.transform.position;
+        battleCtrlPnm.GUIToggle(true);
+        enemyLeaderAnim.SetTrigger("Move");
+        DiagText.text = _name+"\n이가 승부를 걸어왔다!";
+        StartCoroutine(CheckDown());
+        StartCoroutine(TrainerMove(false));
+
+    }
+    public bool isWait = false;
+    private void Update()
+    {
+        if (isNpcBattle)
+        {
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                if (!isBattleStart)
+                {
+                    GameObject.Find("BattleProcess").GetComponent<BattleProcess>().currentZone = gameObject.GetComponent<PokemonZone>();
+                    NPCBattlePokemonSpawn(0);
+                }
+
+            }
+        }
+    }
+
+    IEnumerator CheckDown()
+    {
+        yield return new WaitForSeconds(1.5f);
+        isWait = true;
+    }
+
+    public void NPCBattlePokemonSpawn(int _num)
+    {
+        if (!isWait) return;
+        if(!isBattleStart)enemyLeaderAnim.SetTrigger("Return");
+        isBattleStart = true;
+        battleCursor += _num;
+        pokemons[battleCursor].RandomPokeMon();
+        DiagText.text = NPCNAME + "(은)\n" + pokemons[battleCursor].nameKor + "(을)차례로 꺼냈다!";
+        enemyPokemonAnim.SetTrigger("Move");
+        EnemyImg.sprite = pokemons[battleCursor].myCharImg_Front;
+        NameText.text = pokemons[battleCursor].nameKor + ":L" + pokemons[battleCursor].LEVEL;
+        int i = 0;
+        PoketmonType _pkmTemp = null;
+        bool isSet = false;
+        foreach (PoketmonType _pkm in playerPokemonCtrl.pokemonList)
+        {
+            if (_pkm.HP > 0)
+            {
+                if (isSet == false)
+                {
+                    isSet = true;
+                    _pkmTemp = _pkm;
+                };
+                i++;
+            }
+        }
+        playerPokemonCtrl.pokemon = _pkmTemp;
+        GameObject.Find("BattleProcess").GetComponent<BattleProcess>().myPokemon = playerPokemonCtrl.pokemon;
+        ResetPokemon(false, (battleCursor == 0));
+        GameObject.Find("BattleProcess").GetComponent<BattleProcess>().enemyPokemon = pokemons[battleCursor];
+        GameObject.Find("BattleProcess").GetComponent<BattleProcess>().ResetEHP();
+        GameObject.Find("BattleProcess").GetComponent<BattleProcess>().ResetHP();
+        GameObject.Find("BattleProcess").GetComponent<BattleProcess>().nowBattle = true;
+        //if(battleCursor == 0)StartCoroutine(SpawnPokemonWait());
+
+        //CallView();
+
+
+
+    }
+
+
     public void CheckZone(Collider2D collision)
     {
         if (collision.tag == "Player")
@@ -121,13 +228,11 @@ public class PokemonZone : MonoBehaviour
                         isSet = true;
                         _pkmTemp = _pkm;
                     };
-                    Debug.Log("ㅍㅋㅁ : " + _pkm.nameKor);
                     i++;
                 }
             }
             if (i == 0) return;
 
-            Debug.Log("충돌");
             int _per = Random.Range(1, 101);
             if (_per <= percent)
             {
@@ -142,10 +247,8 @@ public class PokemonZone : MonoBehaviour
 
                 GameObject.Find("BattleProcess").GetComponent<BattleProcess>().currentZone = gameObject.GetComponent<PokemonZone>();
                 playerPokemonCtrl.pokemon = _pkmTemp;
-                Debug.Log("템프 : " + _pkmTemp.nameKor);
-                Debug.Log("컨트롤러 : " + playerPokemonCtrl.pokemon.nameKor);
                 GameObject.Find("BattleProcess").GetComponent<BattleProcess>().myPokemon = playerPokemonCtrl.pokemon;
-                ResetPokemon(false);
+                ResetPokemon(false, true);
                 GameObject.Find("BattleProcess").GetComponent<BattleProcess>().ResetHP();
                 GameObject.Find("BattleProcess").GetComponent<BattleProcess>().nowBattle = true;
                 GameObject.Find("BattleProcess").GetComponent<BattleProcess>().enemyPokemon = pokemons[_rdm];
@@ -180,11 +283,11 @@ public class PokemonZone : MonoBehaviour
     }
 
 
-    private IEnumerator TrainerMove()
+    private IEnumerator TrainerMove(bool _type)
     {
-        yield return new WaitForSeconds(0.0f);
+        yield return new WaitForSeconds(1.5f);
         trainerCtrl.SetTrigger("Move");
-        trainerPokemonCtrl.SetTrigger("Move");
+        if(_type)trainerPokemonCtrl.SetTrigger("Move");
     }
     private IEnumerator MenuView()
     {

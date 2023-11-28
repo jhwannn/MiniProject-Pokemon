@@ -173,6 +173,13 @@ public class BattleProcess : MonoBehaviour
     {
         float _hp = (myPokemon.HP / myPokemon.MAXHP);
         myHPBar.SetHP(_hp);
+
+    }
+    public void ResetEHP()
+    {
+        float _hp = (enemyPokemon.HP / enemyPokemon.MAXHP);
+        enemyHPBar.SetHP(_hp);
+
     }
 
 
@@ -180,7 +187,7 @@ public class BattleProcess : MonoBehaviour
     {
         playerPokemon.pokemon = playerPokemon.pokemonList[i];
         pokemonListTarget.GUIToggle(false);
-        currentZone.ResetPokemon(true);
+        currentZone.ResetPokemon(true, true);
         DialogText.text = "가랏! " + myPokemon.nameKor + "!";
 
     }
@@ -208,7 +215,7 @@ public class BattleProcess : MonoBehaviour
                     isChange = true;
                     Debug.Log(playerPokemon.pokemonList[i].nameKor + " : " + playerPokemon.pokemonList[i].HP);
                     playerPokemon.pokemon = playerPokemon.pokemonList[i];
-                    currentZone.ResetPokemon(false);
+                    currentZone.ResetPokemon(false, true);
                     
                     break;
                 }
@@ -252,17 +259,52 @@ public class BattleProcess : MonoBehaviour
 
             myPokemon.EXP += _addExp;
             yield return new WaitForSeconds(0.7f);
+
             EnemyImage.sprite = null;
-            if (myPokemon.EXP >= myPokemon.MAXEXP)
+            if (currentZone.isNpcBattle)
             {
-                StartCoroutine(CalcExp());
+                if(currentZone.pokemons.Count-1 > currentZone.battleCursor)
+                {
+                    yield return new WaitForSeconds(1f);
+                    currentZone.NPCBattlePokemonSpawn(+1);
+
+                }
+                else
+                {
+                    DialogText.text = currentZone.NPCNAME + "과의 \n대결에서 승리했다!";
+                    currentZone.myNPC.isBlock = true;
+                    yield return new WaitForSeconds(1f);
+                    if (myPokemon.EXP >= myPokemon.MAXEXP)
+                    {
+                        StartCoroutine(CalcExp());
+                    }
+                    else
+                    {
+                        battleCtrlPnm.GUIToggle(false);
+                        ResetBattle();
+                    }
+
+                }
 
             }
             else
             {
-                battleCtrlPnm.GUIToggle(false);
-                ResetBattle();
+
+                if (myPokemon.EXP >= myPokemon.MAXEXP)
+                {
+                    StartCoroutine(CalcExp());
+                }
+                else
+                {
+                    battleCtrlPnm.GUIToggle(false);
+                    ResetBattle();
+                }
+
+
+
             }
+
+
             
 
         }
@@ -288,7 +330,7 @@ public class BattleProcess : MonoBehaviour
             myPokemon.LEVEL++;
             expBar.fillAmount = myPokemon.EXP / myPokemon.MAXEXP;
             myName.text = myPokemon.nameKor + ":L" + myPokemon.LEVEL;
-            DialogText.text = myPokemon.nameKor + "은(는) \n 레벨" + myPokemon.LEVEL + "(으)로 올랐다!";
+            DialogText.text = myPokemon.nameKor + "은(는) \n레벨" + myPokemon.LEVEL + "(으)로 올랐다!";
             yield return new WaitForSeconds(0.3f);
             if (myPokemon.EXP >= myPokemon.MAXEXP)
             {
@@ -301,7 +343,7 @@ public class BattleProcess : MonoBehaviour
             }
 
         }
-        if(myPokemon.LEVEL >= 16)
+        if(myPokemon.LEVEL >= 16 && myPokemon.myNextMob != null)
         {
             RevolutionObj.SetActive(true);
             RevPkmImg.sprite = myPokemon.myCharImg_Front;
