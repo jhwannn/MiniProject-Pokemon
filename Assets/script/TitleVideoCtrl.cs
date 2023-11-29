@@ -11,6 +11,7 @@ public class TitleVideoCtrl : MonoBehaviour
     public Texture OpenningTex;
     public Texture BeforeStartTex;
     public VideoPlayer BeforePlayer;
+    public VideoPlayer OpeningPlayer;
     public bool canSkip = false;
 
     IEnumerator cor;
@@ -26,6 +27,7 @@ public class TitleVideoCtrl : MonoBehaviour
         yield return new WaitForSeconds(25f);
         BeforePlayer.Play();
         isOpenFin = true;
+        OpeningPlayer.Stop();
         canSkip = true;
         TargetImage.texture = BeforeStartTex;
 
@@ -48,6 +50,7 @@ public class TitleVideoCtrl : MonoBehaviour
         {
             StartCoroutine(WaitForSceneSkip());
             isOpenFin = true;
+            OpeningPlayer.Stop();
             BeforePlayer.Play();
             TargetImage.texture = BeforeStartTex;
             StopCoroutine(cor);
