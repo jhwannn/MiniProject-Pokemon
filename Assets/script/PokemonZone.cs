@@ -35,6 +35,9 @@ public class PokemonZone : MonoBehaviour
     public string NPCNAME;
     public bool isEnter;
     public NPCCtrl myNPC;
+
+    public AudioSource BGMPlayer;
+    public AudioClip WildBGM;
     
 
     public float num;
@@ -128,14 +131,16 @@ public class PokemonZone : MonoBehaviour
     public void CallView()
     {
         battleMenuCtrl.ResetMenu();
-        StartCoroutine(MenuView());
+        
         StartCoroutine(TrainerMove(true));
     }
 
     public void NPCBattle(string _name, NPCCtrl npc)
     {
+        WildStartSound();
         myNPC = npc;
         myNPC.TextCursor = 0;
+        
         NPCNAME = _name;
         isNpcBattle = true;
         PlayerPokemonImg.gameObject.transform.position = currentTrainerPokemonPos;
@@ -143,6 +148,8 @@ public class PokemonZone : MonoBehaviour
         battleCtrlPnm.GUIToggle(true);
         enemyLeaderAnim.SetTrigger("Move");
         DiagText.text = _name+"\n이가 승부를 걸어왔다!";
+        NameText.text = _name;
+        TrainerNameText.text = "";
         StartCoroutine(CheckDown());
         StartCoroutine(TrainerMove(false));
 
@@ -162,6 +169,12 @@ public class PokemonZone : MonoBehaviour
 
             }
         }
+    }
+    public void WildStartSound()
+    {
+        GameObject.Find("BattleProcess").GetComponent<BattleProcess>().saveClip = BGMPlayer.clip;
+        BGMPlayer.clip = WildBGM;
+        BGMPlayer.Play();
     }
 
     IEnumerator CheckDown()
@@ -236,11 +249,13 @@ public class PokemonZone : MonoBehaviour
             int _per = Random.Range(1, 101);
             if (_per <= percent)
             {
+                WildStartSound();
                 //포켓몬 등장!
                 int _rdm = Random.Range(0, pokemons.Count);
                 pokemons[_rdm].RandomPokeMon();
                 battleCtrlPnm.GUIToggle(true);
                 DiagText.text = "야생의 " + pokemons[_rdm].nameKor + "이(가) 나타났다!";
+                StartCoroutine(SoundWait());
                 EnemyImg.sprite = pokemons[_rdm].myCharImg_Front;
                 NameText.text = pokemons[_rdm].nameKor+":L"+ pokemons[_rdm].LEVEL;
 
@@ -259,6 +274,11 @@ public class PokemonZone : MonoBehaviour
             }
         }
 
+    }
+    IEnumerator SoundWait()
+    {
+        yield return new WaitForSeconds(0.9f);
+        SoundCtrl.PlaySound("Pokemon_cry");
     }
 
 
@@ -288,6 +308,11 @@ public class PokemonZone : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         trainerCtrl.SetTrigger("Move");
         if(_type)trainerPokemonCtrl.SetTrigger("Move");
+        else
+        {
+            if (!isNpcBattle) 
+            StartCoroutine(MenuView());
+        }
     }
     private IEnumerator MenuView()
     {

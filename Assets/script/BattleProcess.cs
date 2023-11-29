@@ -46,6 +46,12 @@ public class BattleProcess : MonoBehaviour
 
     public GameObject RevolutionObj;
     public Image RevPkmImg;
+    public PanelManager battleGUI;
+
+    public AudioSource BGMPlayer;
+
+    public AudioClip saveClip;
+    
     
 
 
@@ -60,13 +66,27 @@ public class BattleProcess : MonoBehaviour
 
     public void UseBall()
     {
+        if (currentZone.isNpcBattle)
+        {
+            BagPnm.GUIToggle(false);
+            menuGroup.SetActive(false);
+            DialogText.text = "마스터와의 배틀에서는\n사용할 수 없다!";
+            StartCoroutine(WaitForErrorMsg());
+            return;
+        }
+        SoundCtrl.PlaySound("Throw_ball");
         BagPnm.GUIToggle(false);
         menuGroup.SetActive(false);
         BallObj.SetActive(true);
         BallAnim.SetTrigger("Throw");
 
     }
+    IEnumerator WaitForErrorMsg()
+    {
+        yield return new WaitForSeconds(0.5f);
+        menuGroup.SetActive(true);
 
+    }
 
     public void GetPokemon()
     {
@@ -79,6 +99,8 @@ public class BattleProcess : MonoBehaviour
         if (_rdm <= per)
         {
             DialogText.text = "신난다!\n" + enemyPokemon.nameKor + "를(을) 잡았다!!";
+            
+            SoundCtrl.PlaySound("Get_item_or_pokemon");
             playerPokemon.pokemonList.Add(new Pikachu(enemyPokemon));
             StartCoroutine(WaitForGetComplete());
 
@@ -133,11 +155,36 @@ public class BattleProcess : MonoBehaviour
         Hider.SetActive(false);
         BallAnim.SetTrigger("Reset");
         RevolutionObj.SetActive(false);
+        menuGroup.SetActive(false);
         nowBattle = false;
+        BGMEndBattle();
+
 
     }
     public void RunBattle()
     {
+        if (currentZone.isNpcBattle)
+        {
+            DialogText.text = "도망칠 수 없다!";
+            return;
+        }
+        SoundCtrl.PlaySound("Runaway");
+        menuGroup.SetActive(false);
+        DialogText.text = "배틀에서 도망친다!";
+        StartCoroutine(WaitSoundRun());
+
+    }
+
+    public void BGMEndBattle()
+    {
+        BGMPlayer.clip = saveClip;
+        BGMPlayer.Play();
+    }
+
+    IEnumerator WaitSoundRun()
+    {
+        yield return new WaitForSeconds(1f);
+        battleGUI.GUIToggle(false);
         nowBattle = false;
         ResetBattle();
     }
@@ -204,6 +251,7 @@ public class BattleProcess : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
             DialogText.text = myPokemon.nameKor + "이(가) 쓰러졌다!";
+            SoundCtrl.PlaySound("pokemon_die");
             myAnimator.SetTrigger("DieTrainer");
             yield return new WaitForSeconds(1.3f);
             int i = 0;
@@ -224,6 +272,7 @@ public class BattleProcess : MonoBehaviour
             }
             if (!isChange)
             {
+
                 DialogText.text = "심향은 싸울 수 있는 포켓몬이 없다...";
                 yield return new WaitForSeconds(1f);
                 battleCtrlPnm.GUIToggle(false);
@@ -250,11 +299,22 @@ public class BattleProcess : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
             DialogText.text = enemyPokemon.nameKor + "을(를) 쓰러트렸다!";
+            SoundCtrl.PlaySound("pokemon_die");
             enemyAnimator.SetTrigger("DIE");
             yield return new WaitForSeconds(0.5f);
             int _addExp = (int)(enemyPokemon.MAXHP * enemyPokemon.LEVEL * 3);
             DialogText.text = myPokemon.nameKor + "은(는) \n" + _addExp + " 경험치를 얻었다!";
             expBar.fillAmount = myPokemon.EXP / myPokemon.MAXEXP;
+            
+            if (currentZone.myNPC != null)
+            {
+                if (currentZone.myNPC.isLeader)
+                if (!(currentZone.pokemons.Count - 1 > currentZone.battleCursor))  SoundCtrl.PlaySound("Gym_leader_battle_victory");
+            }
+            else
+            {
+                SoundCtrl.PlaySound("Wild_Pokemon_victory");
+            }
 
 
             myPokemon.EXP += _addExp;
@@ -271,7 +331,15 @@ public class BattleProcess : MonoBehaviour
                 }
                 else
                 {
+
                     DialogText.text = currentZone.NPCNAME + "과의 \n대결에서 승리했다!";
+                    if (currentZone.myNPC.isEnding)
+                    {
+                        LoadingSceneManager.LoadScene("Ending");
+
+
+                    }
+
                     currentZone.myNPC.isBlock = true;
                     yield return new WaitForSeconds(1f);
                     if (myPokemon.EXP >= myPokemon.MAXEXP)
@@ -280,6 +348,7 @@ public class BattleProcess : MonoBehaviour
                     }
                     else
                     {
+
                         battleCtrlPnm.GUIToggle(false);
                         ResetBattle();
                     }
@@ -292,10 +361,12 @@ public class BattleProcess : MonoBehaviour
 
                 if (myPokemon.EXP >= myPokemon.MAXEXP)
                 {
+
                     StartCoroutine(CalcExp());
                 }
                 else
                 {
+
                     battleCtrlPnm.GUIToggle(false);
                     ResetBattle();
                 }
@@ -323,6 +394,7 @@ public class BattleProcess : MonoBehaviour
 
     public IEnumerator CalcExp()
     {
+        BGMPlayer.Stop();
         while(myPokemon.EXP >= myPokemon.MAXEXP)
         {
             myPokemon.EXP -= myPokemon.MAXEXP;
@@ -331,7 +403,9 @@ public class BattleProcess : MonoBehaviour
             expBar.fillAmount = myPokemon.EXP / myPokemon.MAXEXP;
             myName.text = myPokemon.nameKor + ":L" + myPokemon.LEVEL;
             DialogText.text = myPokemon.nameKor + "은(는) \n레벨" + myPokemon.LEVEL + "(으)로 올랐다!";
-            yield return new WaitForSeconds(0.3f);
+            SoundCtrl.PlaySound("Level_Up");
+
+            yield return new WaitForSeconds(1f);
             if (myPokemon.EXP >= myPokemon.MAXEXP)
             {
                 
@@ -345,6 +419,7 @@ public class BattleProcess : MonoBehaviour
         }
         if(myPokemon.LEVEL >= 16 && myPokemon.myNextMob != null)
         {
+            SoundCtrl.PlaySound("Evolution");
             RevolutionObj.SetActive(true);
             RevPkmImg.sprite = myPokemon.myCharImg_Front;
             StartCoroutine(RevPkmImgIenum());
@@ -392,6 +467,7 @@ public class BattleProcess : MonoBehaviour
         myPokemon = _new;
 
         yield return new WaitForSeconds(2f);
+        SoundCtrl.StopSound();
         battleCtrlPnm.GUIToggle(false);
         ResetBattle();
 

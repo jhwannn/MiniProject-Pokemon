@@ -21,6 +21,14 @@ public class PlayerPokemon : MonoBehaviour
         }
     }
     
+    public void HealPokemon()
+    {
+        foreach (PoketmonType pkm in pokemonList)
+        {
+            pkm.HP = pkm.MAXHP;
+        }
+        SoundCtrl.PlaySound("healed_pokemon");
+    }
 
     public void ListReset()
     {
@@ -31,7 +39,7 @@ public class PlayerPokemon : MonoBehaviour
         foreach (PoketmonType pkm in pokemonList)
         {
             GameObject _temp = Instantiate(_prefab);
-            _temp.GetComponent<PokemonRowPanel>().SetRow(pkm.nameKor, pkm.HP, pkm.MAXHP, pkm.LEVEL);
+            _temp.GetComponent<PokemonRowPanel>().SetRow(pkm.nameKor, pkm.HP, pkm.MAXHP, pkm.LEVEL, pkm.myCharImg_Front);
             _temp.transform.SetParent(parentObject.transform);
             parentObject.GetComponent<KeyboardMenuCtrl>()._panel.Add(_temp.GetComponent<KeyboardMenuPanel>());
             _temp.GetComponent<KeyboardMenuPanel>().PokemonSel = i;

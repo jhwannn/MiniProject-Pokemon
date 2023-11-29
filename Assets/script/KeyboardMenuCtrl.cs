@@ -47,7 +47,6 @@ public class KeyboardMenuCtrl : MonoBehaviour
                 AllDeSel();
                 _panel[nowSel].SetStatus(true);
                 _panel[nowSel].ChooseTriggerAction();
-                Debug.Log("Down ¼¿¹øÈ£  " + nowSel);
 
             }
         }
@@ -59,14 +58,13 @@ public class KeyboardMenuCtrl : MonoBehaviour
                 AllDeSel();
                 _panel[nowSel].SetStatus(true);
                 _panel[nowSel].ChooseTriggerAction();
-                Debug.Log("Up ¼¿¹øÈ£  " + nowSel);
 
 
             }
         }
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            Debug.Log("¼¿¹øÈ£  " + nowSel);
+            SoundCtrl.PlaySound("button");
             _panel[nowSel].SelectTrigger();
         }
 

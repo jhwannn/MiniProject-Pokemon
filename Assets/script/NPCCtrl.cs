@@ -11,6 +11,7 @@ public class NPCCtrl : MonoBehaviour
     public List<string> TalkText;
     public PanelManager DialogPnm;
     public string NpcName;
+    public Sprite Image_Enemy_Human;
     public Text TextBox;
     public float TalkDelay = 1f;
 
@@ -20,6 +21,7 @@ public class NPCCtrl : MonoBehaviour
     public int TextCursor = 0;
     public bool isBattle;
     public PokemonZone myZone;
+    public Image _Target;
 
     public bool ForceTalk;
 
@@ -30,6 +32,8 @@ public class NPCCtrl : MonoBehaviour
 
     bool isCheckEnter;
 
+    public bool isLeader;
+    public bool isEnding;
     public bool isBlock;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -81,7 +85,12 @@ public class NPCCtrl : MonoBehaviour
             {
                 isCheckEnter = true;
                 DialogPnm.GUIToggle(false);
-                if (isBattle) myZone.NPCBattle(NpcName, gameObject.GetComponent<NPCCtrl>());
+                if (isBattle) 
+                {
+                    _Target.sprite = Image_Enemy_Human;
+                    myZone.NPCBattle(NpcName, gameObject.GetComponent<NPCCtrl>());
+                };
+                TextCursor = 0;
                 if (FinishTrigger != null)FinishTrigger.Invoke();
             }
         }
