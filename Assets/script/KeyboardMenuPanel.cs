@@ -28,6 +28,10 @@ public class KeyboardMenuPanel : MonoBehaviour
             Debug.Log("select 2");
             GameObject.Find("BattleProcess").GetComponent<BattleProcess>().ChangePokemon(PokemonSel);
         }
+        else
+        {
+
+        }
  
         ClickTrigger.Invoke();
 

@@ -95,11 +95,13 @@ public class PokemonZone : MonoBehaviour
         
         if (isChange)
         {
+            battleMenuObj.SetActive(false);
             StartCoroutine(ChangeImgWait());
             trainerPokemonCtrl.SetTrigger("ChangePokemon");
         }
         else
         {
+            battleMenuObj.SetActive(false);
             PlayerPokemonImg.sprite = playerPokemonCtrl.pokemon.myCharImg_Back;
             if(isCall)StartCoroutine(SpawnPokemonWait());
             else StartCoroutine(MenuView());

@@ -5113,6 +5113,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pokemons:
   - {fileID: 8282622669490856078, guid: b7168f7815455274fb003b247cd20e13, type: 3}
+  - {fileID: 8282622669490856078, guid: 2b89a141a671af34db8adca72110b3c5, type: 3}
+  - {fileID: 8282622669490856078, guid: 82ae41cd7eacce44f94a40a9aa665884, type: 3}
+  - {fileID: 8282622669490856078, guid: 2ea446646e68a774cb03a125f9b55c65, type: 3}
+  - {fileID: 8282622669490856078, guid: 0fe843b09f29c9145aab8ace960f8f61, type: 3}
+  - {fileID: 8282622669490856078, guid: 68bfdffbeaae01b4aa09c3e67636856b, type: 3}
+  - {fileID: 8282622669490856078, guid: aea411c00cd03f24cb98d8c8cdb0a934, type: 3}
+  - {fileID: 8282622669490856078, guid: 3bc23f4b8373dec46b71bfaa77180e00, type: 3}
+  - {fileID: 8282622669490856078, guid: c228541781d166a4ead41b27edf89ba7, type: 3}
+  - {fileID: 8282622669490856078, guid: aea411c00cd03f24cb98d8c8cdb0a934, type: 3}
+  - {fileID: 8282622669490856078, guid: 9bff812057d4b704ba4f407b52ca29b4, type: 3}
+  - {fileID: 8282622669490856078, guid: 8eacbcc3bd1678245ab90f5b990af708, type: 3}
   battleCtrlPnm: {fileID: 0}
   DiagText: {fileID: 5887836107336139530}
   NameText: {fileID: 5887836108624653426}
