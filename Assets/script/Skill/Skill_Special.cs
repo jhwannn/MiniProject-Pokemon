@@ -8,8 +8,10 @@ public class Skill_Special : SkillType
     public enum SkillList
     {
         ThunderShock,
-        Spark
-
+        Spark,
+        Flamethrow,
+        RockSmash,
+        WaterGun
     }
     [SerializeField]
     SkillList _nowSkill;

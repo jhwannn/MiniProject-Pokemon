@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3739275598639820821}
   - component: {fileID: -6735301049464020337}
   m_Layer: 0
-  m_Name: Thunder_Shock
+  m_Name: Water_Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9463893ab07763947a853a0d01377ce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NameKR: "\uC804\uAE30\uC1FC\uD06C"
-  NameEng: Thunder Shock
+  NameKR: "\uBB3C\uB300\uD3EC"
+  NameEng: Water Gun
   Damage: 40
   PowerPoint: 10
   SkillTrigger:
@@ -63,5 +63,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  nowSkill: 
   battleProcess: {fileID: 0}
-  _nowSkill: 0
+  _nowSkill: 4
