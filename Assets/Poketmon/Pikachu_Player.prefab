@@ -47,21 +47,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameKor: "\uD53C\uCE74\uCE04"
   nameEng: Pikachu
-  LEVEL: 18
-  HP: 200
-  MAXHP: 200
+  LEVEL: 14
+  HP: 1890
+  MAXHP: 2000
   STR: 3
   SPD: 3
   SPECIAL: 3
   PROTECT: 3
-  EXP: 958
-  MAXEXP: 1053
+  EXP: 1864
+  MAXEXP: 2049
   myCharImg_Front: {fileID: 21300000, guid: ea1754db91e68ef43bb3ca9e9e41994d, type: 3}
   myCharImg_Back: {fileID: 21300000, guid: a5e918d2a26b10b478f81da76e40af70, type: 3}
   skillList:
-  - {fileID: 3739275598639820826, guid: 7d8fefc80c0362b479a299b37398320f, type: 3}
+  - {fileID: 3739275598639820826, guid: 33d60d56274d63f4d913b60673eb647f, type: 3}
+  - {fileID: 3739275598639820826, guid: c8de88cab4384b9499790a5546cc8796, type: 3}
   - {fileID: -6735301049464020337, guid: 815fd6a03b605b944af0d0ad6a3b2d72, type: 3}
-  - {fileID: -6735301049464020337, guid: 8bbc133265a78334187b5b44fe34d4ea, type: 3}
   - {fileID: -6735301049464020337, guid: 29be7aaebf392f347a32b007f1ee3bc1, type: 3}
   myNextMob: {fileID: 8282622669490856078, guid: b48ec0d5a202db047a28a916d5569ceb, type: 3}
   pokemonNature: {fileID: 8485660654983970521}

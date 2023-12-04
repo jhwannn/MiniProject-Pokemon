@@ -9,7 +9,7 @@ public class Skill_Special : SkillType
     {
         ThunderShock,
         Spark,
-        Flamethrow,
+        FlameThrow,
         RockSmash,
         WaterGun
     }

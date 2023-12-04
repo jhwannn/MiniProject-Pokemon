@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3739275598639820821}
-  - component: {fileID: -6735301049464020337}
+  - component: {fileID: 3739275598639820826}
   m_Layer: 0
-  m_Name: Water_Gun
+  m_Name: Leer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-6735301049464020337
+--- !u!114 &3739275598639820826
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,18 +41,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 3739275598639820820}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9463893ab07763947a853a0d01377ce8, type: 3}
+  m_Script: {fileID: 11500000, guid: 142ccf9577b6de243a44271086384a24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NameKR: "\uBB3C\uB300\uD3EC"
-  NameEng: Water Gun
-  Damage: 20
+  NameKR: "\uC9F8\uB824\uBCF4\uAE30"
+  NameEng: Leer
+  Damage: 30
   PowerPoint: 10
   SkillTrigger:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -6735301049464020337}
-        m_TargetAssemblyTypeName: Skill_Special, Assembly-CSharp
+      - m_Target: {fileID: 3739275598639820826}
+        m_TargetAssemblyTypeName: Skill_Attack, Assembly-CSharp
         m_MethodName: UseSkill
         m_Mode: 1
         m_Arguments:

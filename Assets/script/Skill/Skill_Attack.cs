@@ -10,7 +10,14 @@ public class Skill_Attack : SkillType
         QuickAttack,
         Tackle,
         Cut,
-        Slash
+        Slash,
+        Leer,
+        Peck,
+        PoisonSting,
+        SandAttack,
+        Growl,
+        Gust,
+        VineWhip
 
     }
     [SerializeField]

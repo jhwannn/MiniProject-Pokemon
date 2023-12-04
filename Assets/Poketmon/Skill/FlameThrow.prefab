@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9463893ab07763947a853a0d01377ce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NameKR: "\uBD88\uAF43\uC138\uB840"
-  NameEng: Flamethrow
+  NameKR: "\uD654\uC5FC\uBC29\uC0AC"
+  NameEng: FlamThrow
   Damage: 40
   PowerPoint: 10
   SkillTrigger:
