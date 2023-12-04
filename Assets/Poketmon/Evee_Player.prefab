@@ -48,8 +48,8 @@ MonoBehaviour:
   nameKor: "\uC774\uBE0C\uC774"
   nameEng: Evee
   LEVEL: 3
-  HP: 200
-  MAXHP: 200
+  HP: 2000
+  MAXHP: 2000
   STR: 69
   SPD: 19
   SPECIAL: 36
