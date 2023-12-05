@@ -302,7 +302,7 @@ public class BattleProcess : MonoBehaviour
             SoundCtrl.PlaySound("pokemon_die");
             enemyAnimator.SetTrigger("DIE");
             yield return new WaitForSeconds(0.5f);
-            int _addExp = (int)(enemyPokemon.MAXHP * enemyPokemon.LEVEL * 3);
+            int _addExp = (int)(enemyPokemon.MAXHP * 1);
             DialogText.text = myPokemon.nameKor + "은(는) \n" + _addExp + " 경험치를 얻었다!";
             expBar.fillAmount = myPokemon.EXP / myPokemon.MAXEXP;
             

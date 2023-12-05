@@ -32,6 +32,9 @@ public class PanelManager : MonoBehaviour
     public UnityEvent DisableTrigger;
 
 
+    [Header("Key Input Close")]
+    public bool KeyInputClose;
+    public KeyCode CloseKey;
 
     public bool GUIStatus = false;
     private GameObject GUIPanel;
@@ -60,6 +63,11 @@ public class PanelManager : MonoBehaviour
 
     void Update()
     {
+        if(KeyInputClose && Input.GetKeyDown(CloseKey) && GUIStatus)
+        {
+            GUIToggle(false);
+            return;
+        }
 
         if (Input.GetKeyDown(GUIKey))
         {
