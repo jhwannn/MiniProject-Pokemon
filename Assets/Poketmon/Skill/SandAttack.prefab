@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NameKR: "\uBAA8\uB798\uBFCC\uB9AC\uAE30"
   NameEng: SandAttack
-  Damage: 30
+  Damage: 20
   PowerPoint: 10
   SkillTrigger:
     m_PersistentCalls:

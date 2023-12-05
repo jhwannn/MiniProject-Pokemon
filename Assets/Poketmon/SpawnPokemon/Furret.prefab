@@ -59,7 +59,7 @@ MonoBehaviour:
   myCharImg_Front: {fileID: 21300000, guid: b09b78e2d7f256948a5149ae22953e47, type: 3}
   myCharImg_Back: {fileID: 21300000, guid: 82fd124ac0b4ba74999449b6518bbc42, type: 3}
   skillList:
-  - {fileID: 3739275598639820826, guid: 7d8fefc80c0362b479a299b37398320f, type: 3}
+  - {fileID: -6735301049464020337, guid: 29be7aaebf392f347a32b007f1ee3bc1, type: 3}
   myNextMob: {fileID: 0}
   pokemonNature: {fileID: 8485660654983970521}
   nature: 

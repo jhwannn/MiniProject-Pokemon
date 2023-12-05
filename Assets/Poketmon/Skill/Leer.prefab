@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NameKR: "\uC9F8\uB824\uBCF4\uAE30"
   NameEng: Leer
-  Damage: 30
+  Damage: 40
   PowerPoint: 10
   SkillTrigger:
     m_PersistentCalls:

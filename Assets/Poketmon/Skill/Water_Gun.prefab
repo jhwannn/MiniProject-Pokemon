@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NameKR: "\uBB3C\uB300\uD3EC"
   NameEng: Water Gun
-  Damage: 20
+  Damage: 40
   PowerPoint: 10
   SkillTrigger:
     m_PersistentCalls:

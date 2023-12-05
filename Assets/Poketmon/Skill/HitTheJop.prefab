@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 142ccf9577b6de243a44271086384a24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NameKR: "\uC7A1\uCE58\uAE30"
+  NameKR: "\uC548\uB2E4\uB9AC\uAC78\uAE30"
   NameEng: HitTheJop
-  Damage: 30
+  Damage: 50
   PowerPoint: 10
   SkillTrigger:
     m_PersistentCalls:

@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NameKR: "\uB0C9\uB3D9\uD380\uCE58"
   NameEng: IcePunch
-  Damage: 30
+  Damage: 50
   PowerPoint: 10
   SkillTrigger:
     m_PersistentCalls:

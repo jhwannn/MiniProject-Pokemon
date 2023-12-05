@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NameKR: "\uB369\uAD74\uCC44\uCC0D"
   NameEng: VineWhip
-  Damage: 30
+  Damage: 40
   PowerPoint: 10
   SkillTrigger:
     m_PersistentCalls:

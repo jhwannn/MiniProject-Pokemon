@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NameKR: "\uBC14\uB78C \uC77C\uC73C\uD0A4\uAE30"
   NameEng: Gust
-  Damage: 30
+  Damage: 40
   PowerPoint: 10
   SkillTrigger:
     m_PersistentCalls:

@@ -44,9 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 142ccf9577b6de243a44271086384a24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NameKR: "\uD0A4\uB124\uC2DC\uC2A4"
+  NameKR: "\uC21F\uAC00\uB77D\uD718\uAE30"
   NameEng: kinesis
-  Damage: 20
+  Damage: 30
   PowerPoint: 10
   SkillTrigger:
     m_PersistentCalls:
