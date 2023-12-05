@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8282622669490856078}
   - component: {fileID: 8485660654983970521}
   m_Layer: 0
-  m_Name: d
+  m_Name: Raticate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,7 +56,7 @@ MonoBehaviour:
   PROTECT: 0
   EXP: 0
   MAXEXP: 200
-  myCharImg_Front: {fileID: 21300000, guid: 4a3b7cc41078e4b44a1bb18b22060c85, type: 3}
+  myCharImg_Front: {fileID: 21300000, guid: 43e9063b452535e44828573d390fde76, type: 3}
   myCharImg_Back: {fileID: 21300000, guid: f7f35a69d9583694aa5d6852fea4dbb3, type: 3}
   skillList:
   - {fileID: 3739275598639820826, guid: 7d8fefc80c0362b479a299b37398320f, type: 3}

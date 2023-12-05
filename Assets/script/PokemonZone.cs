@@ -88,6 +88,8 @@ public class PokemonZone : MonoBehaviour
             _temp.GetComponent<SkillRowCtrl>().SkillName.text = _skill.NameKR;
             _temp.GetComponent<SkillRowCtrl>()._mySkill = _skill;
             _temp.transform.SetParent(skillGroup.transform);
+            _temp.transform.localScale = new Vector3(1, 1, 1);
+
             _temp.GetComponent<KeyboardMenuPanel>().ClickTrigger = _skill.SkillTrigger;
             skillGroup.GetComponent<KeyboardMenuCtrl>()._panel.Add(_temp.GetComponent<KeyboardMenuPanel>());
         }
@@ -194,6 +196,7 @@ public class PokemonZone : MonoBehaviour
         pokemons[battleCursor].RandomPokeMon();
         DiagText.text = NPCNAME + "(Àº)\n" + pokemons[battleCursor].nameKor + "(À»)Â÷·Ê·Î ²¨³Â´Ù!";
         enemyPokemonAnim.SetTrigger("Move");
+        GameObject.Find("BattleProcess").GetComponent<BattleProcess>().dieGuard.SetActive(false);
         EnemyImg.sprite = pokemons[battleCursor].myCharImg_Front;
         NameText.text = pokemons[battleCursor].nameKor + ":L" + pokemons[battleCursor].LEVEL;
         int i = 0;
@@ -260,7 +263,7 @@ public class PokemonZone : MonoBehaviour
                 StartCoroutine(SoundWait());
                 EnemyImg.sprite = pokemons[_rdm].myCharImg_Front;
                 NameText.text = pokemons[_rdm].nameKor+":L"+ pokemons[_rdm].LEVEL;
-
+                GameObject.Find("BattleProcess").GetComponent<BattleProcess>().dieGuard.SetActive(false);
 
                 GameObject.Find("BattleProcess").GetComponent<BattleProcess>().currentZone = gameObject.GetComponent<PokemonZone>();
                 playerPokemonCtrl.pokemon = _pkmTemp;

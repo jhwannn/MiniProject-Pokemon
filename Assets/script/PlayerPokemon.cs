@@ -41,6 +41,7 @@ public class PlayerPokemon : MonoBehaviour
             GameObject _temp = Instantiate(_prefab);
             _temp.GetComponent<PokemonRowPanel>().SetRow(pkm.nameKor, pkm.HP, pkm.MAXHP, pkm.LEVEL, pkm.myCharImg_Front);
             _temp.transform.SetParent(parentObject.transform);
+            _temp.transform.localScale = new Vector3(1, 1, 1);
             parentObject.GetComponent<KeyboardMenuCtrl>()._panel.Add(_temp.GetComponent<KeyboardMenuPanel>());
             _temp.GetComponent<KeyboardMenuPanel>().PokemonSel = i;
             _temp.GetComponent<KeyboardMenuPanel>().isPkm = true;

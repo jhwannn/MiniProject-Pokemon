@@ -69,6 +69,8 @@ public class InventoryCtrl : MonoBehaviour
             //Console.WriteLine("Key: {0}, Value: {1}", kv.Key, kv.Value);
             GameObject _chatsLine = Instantiate(itemPrefab);
             _chatsLine.transform.SetParent(_targetInv.transform);
+            _chatsLine.transform.localScale = new Vector3(1, 1, 1);
+
             _chatsLine.GetComponent<ItemPanelCtrl>().SetData(_item.Key.ItemNameKR, _item.Value, _item.Key);
             keyboardCtrl._panel.Add(_chatsLine.GetComponent<KeyboardMenuPanel>());
             _chatsLine.GetComponent<KeyboardMenuPanel>().ClickTrigger = BallTrigger;

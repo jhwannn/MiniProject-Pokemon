@@ -57,7 +57,7 @@ MonoBehaviour:
   EXP: 0
   MAXEXP: 200
   myCharImg_Front: {fileID: 21300000, guid: 60b8fb1d2dbb4144e96904dae73fbde5, type: 3}
-  myCharImg_Back: {fileID: 21300000, guid: 8bd6524d870bd444caaa1d4b9e55e85d, type: 3}
+  myCharImg_Back: {fileID: 21300000, guid: 43bbc6c4eed7fbe47be68e4d757452ab, type: 3}
   skillList:
   - {fileID: 3739275598639820826, guid: 7d8fefc80c0362b479a299b37398320f, type: 3}
   myNextMob: {fileID: 0}

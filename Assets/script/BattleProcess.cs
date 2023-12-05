@@ -51,6 +51,7 @@ public class BattleProcess : MonoBehaviour
     public AudioSource BGMPlayer;
 
     public AudioClip saveClip;
+    public GameObject dieGuard;
     
     
 
@@ -299,6 +300,7 @@ public class BattleProcess : MonoBehaviour
         {
             yield return new WaitForSeconds(1f);
             DialogText.text = enemyPokemon.nameKor + "을(를) 쓰러트렸다!";
+            dieGuard.SetActive(true);
             SoundCtrl.PlaySound("pokemon_die");
             enemyAnimator.SetTrigger("DIE");
             yield return new WaitForSeconds(0.5f);

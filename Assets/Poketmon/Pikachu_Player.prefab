@@ -47,22 +47,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameKor: "\uD53C\uCE74\uCE04"
   nameEng: Pikachu
-  LEVEL: 14
+  LEVEL: 15
   HP: 200
   MAXHP: 200
   STR: 3
   SPD: 3
   SPECIAL: 3
   PROTECT: 3
-  EXP: 459
+  EXP: 710
   MAXEXP: 720
   myCharImg_Front: {fileID: 21300000, guid: ea1754db91e68ef43bb3ca9e9e41994d, type: 3}
   myCharImg_Back: {fileID: 21300000, guid: a5e918d2a26b10b478f81da76e40af70, type: 3}
   skillList:
-  - {fileID: 3739275598639820826, guid: 7d8fefc80c0362b479a299b37398320f, type: 3}
-  - {fileID: -6735301049464020337, guid: 815fd6a03b605b944af0d0ad6a3b2d72, type: 3}
-  - {fileID: -6735301049464020337, guid: 8bbc133265a78334187b5b44fe34d4ea, type: 3}
-  - {fileID: 3739275598639820826, guid: 665c48ff6427ca643b2af6596ca52a48, type: 3}
+  - {fileID: 3739275598639820826, guid: 18582fe93755b9447b70aa6c32c5b0ce, type: 3}
+  - {fileID: 3739275598639820826, guid: ce3d7fb3099445741a8387b8d19a121b, type: 3}
+  - {fileID: 3739275598639820826, guid: 60cc9b4f37eff7f4981e6ff54cc1141b, type: 3}
+  - {fileID: -6735301049464020337, guid: 70f2f64a8ebc28d45bf818b3fdd93eb8, type: 3}
   myNextMob: {fileID: 8282622669490856078, guid: b48ec0d5a202db047a28a916d5569ceb, type: 3}
   pokemonNature: {fileID: 8485660654983970521}
   nature: "\uACE0\uC9D1"
