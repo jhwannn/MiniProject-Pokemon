@@ -17,7 +17,11 @@ public class Skill_Attack : SkillType
         SandAttack,
         Growl,
         Gust,
-        VineWhip
+        VineWhip,
+        HitTheJop,
+        DynamicPunch,
+        IcePunch,
+        Kinesis
 
     }
     [SerializeField]
